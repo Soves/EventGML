@@ -1,0 +1,45 @@
+{
+  "resources": [
+    {"id":{"name":"README","path":"notes/README/README.yy",},"order":1,},
+    {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":3,},
+    {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":2,},
+    {"id":{"name":"EventEmitter","path":"scripts/EventEmitter/EventEmitter.yy",},"order":0,},
+  ],
+  "Options": [
+    {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
+    {"name":"Android","path":"options/android/options_android.yy",},
+    {"name":"iOS","path":"options/ios/options_ios.yy",},
+    {"name":"Linux","path":"options/linux/options_linux.yy",},
+    {"name":"macOS","path":"options/mac/options_mac.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrderNodes": [
+    {"roomId":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},},
+  ],
+  "Folders": [
+    {"folderPath":"folders/EventGML.yy","order":1,"resourceVersion":"1.0","name":"EventGML","tags":[],"resourceType":"GMFolder",},
+  ],
+  "AudioGroups": [
+    {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":461609314234257646,"resourceVersion":"1.0","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "2.3.1.536",
+  },
+  "resourceVersion": "1.4",
+  "name": "EventGML",
+  "tags": [],
+  "resourceType": "GMProject",
+}
