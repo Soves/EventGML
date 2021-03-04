@@ -3,62 +3,58 @@ function EventEmitter() constructor
 	
 	_events = {};
 	_maxListeners = 10;
-
-	static _getEventStatus = function(eventName)
-	{
-		var event = _events[$ eventName];
-		if (!is_array(event)) return -1;
-		return 1;
-	}
-	
-	static _setEvent = function(eventName, eventArray)
-	{
-		_events[$ eventName] = eventArray;
-	}
 	
 	static on = function(eventName, listener)
 	{
-		var s = _getEventStatus(eventName);
+		var event = _events[$ eventName];
 		
 		//make sure event has a array
-		if (s = -1) _events[$ eventName] = [];
-		var event = _events[$ eventName];
+		if (!is_array(event)) event = [];
 		
 		//max listeners reached
 		if ( array_length(event) >= _maxListeners) return -1;
 		
 		array_push(event, listener);
 		
+		_events[$ eventName] = event;
 		return 1; //success
 	}
 	
-	
 	static emit = function(eventName)
 	{
-		var s = _getEventStatus(eventName);
+		var event = _events[$ eventName];
 			
 		//event does not exist or there are no listeners
-		if (s = -1) return -1;
-		var event = _events[$ eventName];
-		
-		var args = array_create(argument_count);
-		for (var i = 0; i < argument_count; i++) args[i] = argument[i];
-		
-		for(var i = 0; i < array_length(event); i++)
+		if (!is_array(event)) return -1;
+		var i = 0, _le = array_length(event);
+		do
 		{
-			if (is_struct(event[i])){
-				//this is a wrapper so unwrap it
-				if (event[i].once = true){ //this is a one time listener
-					script_execute_ext(method_get_index(event[i].listener), args, 1, argument_count-1);
-					array_delete(event, i, 1);
-				}
+			switch(argument_count)
+					{
+				case 1:
+					event[i](argument[0]);
+					break;
+				case 2:
+					event[i](argument[0], argument[1]);
+					break;
+				case 3:
+					event[i](argument[0], argument[1], argument[2]);
+					break;
+				case 4:
+					event[i](argument[0], argument[1], argument[2], argument[3]);
+					break;
+				case 5:
+					event[i](argument[0], argument[1], argument[2], argument[3], argument[4]);
+					break;
+				case 6:
+					event[i](argument[0], argument[1], argument[2], argument[3], argument[4], argument[5]);
+					break;
+				case 7:
+					event[i](argument[0], argument[1], argument[2], argument[3], argument[4], argument[5], argument[6]);
+					break;
 			}
-			else
-			{
-				script_execute_ext(method_get_index(event[i]), args, 1, argument_count-1);
-			}
-			
-		}
+			i++;
+		} until (i = _le)
 		
 		return 1; //success
 	}
@@ -80,35 +76,14 @@ function EventEmitter() constructor
 	
 	static listenerCount = function(eventName)
 	{
-		var s = _getEventStatus(eventName);
 		//event does not exist or there are no listeners
-		if (s = -1) return -1;
+		if (!is_array(_events[$ eventName])) return -1;
 		return array_length(_events[$ eventName]);
 	}
 	
 	static rawListeners = function(eventName)
 	{
 		return _events[$ eventName];
-	}
-	
-	static once = function(eventName, listener)
-	{
-		var s = _getEventStatus(eventName);
-		//event does not exist or there are no listeners
-		if (s = -1) _events[$ eventName] = [];
-		var event = _events[$ eventName];
-		
-		//max listeners reached
-		if ( array_length(s) >= _maxListeners) return -1;
-		
-		var _wrapper = {
-			listener: listener,
-			once: true
-		}
-		
-		array_push(event, _wrapper);
-		
-		return 1; //success
 	}
 	
 	static removeAllListeners = function(eventName)
@@ -118,10 +93,9 @@ function EventEmitter() constructor
 	
 	static removeListener = function(eventName, listener)
 	{
-		var s = _getEventStatus(eventName);
-		//event does not exist or there are no listeners
-		if (s = -1) return -1;
 		var event = _events[$ eventName];
+		//event does not exist or there are no listeners
+		if (!is_array(event)) return -1;
 		
 		for(var i = 0; i < array_length(event); i++)
 		{
